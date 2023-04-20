@@ -26,7 +26,8 @@ body{
     text-align: center;
     justify-content: center;
     background-color: white;
-    border: #222;
+    border: 2px solid #222;
+    border-radius: 20%;
     margin: 2px;
     overflow: hidden;
     font-size: small;

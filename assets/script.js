@@ -1,7 +1,7 @@
-let rowAmount = document.getElementById("row");
-let columnAmount = document.getElementById("column");
-let inputButton = document.getElementById("button");
+let difficultyDownButton = document.getElementById("difficultyDown");
+let difficultyUpButton = document.getElementById("difficultyUp");
 let grid = document.getElementById("grid");
+let difficulty = 3;
 
 //Generate tilegrid
 function generateTileGrid(){
@@ -10,13 +10,13 @@ function generateTileGrid(){
     clearTileGrid();
 
     //Sets the grid size to fit
-    grid.style.gridTemplateColumns = `repeat(${columnAmount.value}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${rowAmount.value}, 1fr)`;
+    grid.style.gridTemplateColumns = `repeat(${difficulty}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${difficulty}, 1fr)`;
 
     //Creates a new .tile div for every column in every row
-    for(let i = 0; i < rowAmount.value; i++){
+    for(let i = 0; i < difficulty; i++){
         
-        for(let j = 0; j < columnAmount.value; j++){
+        for(let j = 0; j < difficulty; j++){
             let tile = document.createElement('div');
             tile.className="tile";
             tile.innerText=`${i+1}|${j+1}`
@@ -30,4 +30,21 @@ function clearTileGrid(){
     grid.innerHTML="";
 }
 
-button.addEventListener("click", generateTileGrid);
+function difficultyDown(){
+    if(difficulty>2){
+        difficulty--;
+    }
+    generateTileGrid();
+}
+
+function difficultyUp(){
+    if(difficulty<25){
+        difficulty++;
+    }
+    generateTileGrid();
+}
+
+difficultyDownButton.addEventListener("click", difficultyDown);
+difficultyUpButton.addEventListener("click", difficultyUp);
+
+generateTileGrid()
