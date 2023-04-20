@@ -7,23 +7,27 @@ body{
 }
 
 #playfield{
-    height: 320px;
-    width: 320px;
+    height: 460px;
+    width: 460px;
     background-color:#444;
     border-radius: 6px;
+    padding: 20px;
 }
 
 #grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 4px;
+    height: 100%;
 }
 
 .tile{
-    height: 24px;
-    width: 24px;
-    margin: 4px;
+    height: auto;
+    width: auto;
     text-align: center;
     justify-content: center;
     background-color: white;
+    border: #222;
+    margin: 2px;
+    overflow: hidden;
+    font-size: small;
 }
