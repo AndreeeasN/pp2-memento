@@ -1,13 +1,15 @@
 let levelResetButton = document.getElementById("levelReset");
 let levelUpButton = document.getElementById("levelUp");
 let grid = document.getElementById("grid");
-
+let tilesArray = [];
+let correctTiles = [];
 let level = 1;
 let maxLevel = 64;
 //Difficulty is used for grid size (3 is 3x3, 4 is 4x4 etc.)
 let difficulty = 3;
-let correctTiles = [];
+let mode = "select";
 
+//GRID GENERATION 
 
 //Generate tilegrid
 function generateTileGrid(){
@@ -26,10 +28,14 @@ function generateTileGrid(){
             let newTile = document.createElement('div');
             newTile.className="tile";
             newTile.innerText=`${i + 1}|${j + 1}`
-            
+            newTile.addEventListener("click", tileInteract);
+
             grid.appendChild(newTile);
         }
     }
+
+    //Sets array of tiles for use in tileInteract(), as normal HTMLCollections lack the indexOf() function
+    tilesArray = Array.from(document.getElementsByClassName("tile"));
 }
 
 //Generate an array of the tiles to be remembered
@@ -51,7 +57,25 @@ function generateCorrectTiles(){
     for(let index of correctTiles){
         tiles[index].style.backgroundColor="white";
     }
-    console.log(tiles);
+}
+
+
+function tileInteract(){
+
+    //Reveals tile if it exists in correctTiles[] and user is allowed to select
+    if(mode === "select"){
+        //Index of the selected tile
+        let tileIndex = tilesArray.indexOf(this)
+        let tiles = document.getElementsByClassName("tile");
+
+        if (correctTiles.includes(tileIndex)){
+            
+            tiles[tileIndex].style.backgroundColor="lightgreen";
+        }
+        else{
+            tiles[tileIndex].style.backgroundColor="lightcoral";
+        }
+    }
 }
 
 //Clears the grid, used inbetween levels
