@@ -6,6 +6,7 @@ body{
     background-color: #222;
 }
 
+/* Game containers */
 #playfield{
     height: 460px;
     width: 460px;
@@ -20,12 +21,13 @@ body{
     height: 100%;
 }
 
+/* generated tiles */
 .tile{
     height: auto;
     width: auto;
     text-align: center;
     justify-content: center;
-    background-color: white;
+    background-color: #777;
     border: 2px solid #222;
     border-radius: 20%;
     margin: 2px;

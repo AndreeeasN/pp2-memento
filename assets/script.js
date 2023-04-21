@@ -1,7 +1,10 @@
-let difficultyDownButton = document.getElementById("difficultyDown");
-let difficultyUpButton = document.getElementById("difficultyUp");
+let levelResetButton = document.getElementById("levelReset");
+let levelUpButton = document.getElementById("levelUp");
 let grid = document.getElementById("grid");
-let level = 3;
+
+let level = 1;
+let maxLevel = 64;
+//Difficulty is used for grid size (3 is 3x3, 4 is 4x4 etc.)
 let difficulty = 3;
 let correctTiles = [];
 
@@ -22,7 +25,7 @@ function generateTileGrid(){
 
             let newTile = document.createElement('div');
             newTile.className="tile";
-            newTile.innerText=`${i+1}|${j+1}`
+            newTile.innerText=`${i + 1}|${j + 1}`
             
             grid.appendChild(newTile);
         }
@@ -31,52 +34,64 @@ function generateTileGrid(){
 
 //Generate an array of the tiles to be remembered
 function generateCorrectTiles(){
-    //The amount of correct tiles needed, we'll start with 3 tiles on level 1
-    let neededTiles = level + 2;
+    //The amount of correct tiles needed, we'll start with 2 tiles on level 1
+    let neededTiles = level + 1;
 
     //Generates random numbers inbetween 1 and difficulty^2 and adds to array of correct tiles
     while(correctTiles.length < neededTiles){
 
-        let num = Math.floor(Math.random() * difficulty*difficulty) ;
+        let num = Math.floor(Math.random() * (difficulty * difficulty));
         if(correctTiles.indexOf(num) === -1){
             correctTiles.push(num);
         }        
     }
 
-    //DEBUG - COLORS TILES
+    //DEBUG - COLORS CORRECT TILES
     let tiles = document.getElementsByClassName("tile");
     for(let index of correctTiles){
-        tiles[index].style.backgroundColor="green";
+        tiles[index].style.backgroundColor="white";
     }
     console.log(tiles);
 }
 
+//Clears the grid, used inbetween levels
 function clearTileGrid(){
     grid.innerHTML="";
     correctTiles=[];
 }
 
-function difficultyDown(){
-    if(difficulty>2){
-        difficulty--;
-        level-=3;
+//Resets level
+function levelReset(){
+    if(level>1){
+        level=1;
+        calculateDifficulty();
     }
-    
+
     generateTileGrid();
     generateCorrectTiles();
 }
 
-function difficultyUp(){
-    if(difficulty<25){
-        difficulty++;
-        level+=3;
+//Increases level
+function levelUp(){
+    if(level<maxLevel){
+        level++;
+        calculateDifficulty();
     }
-    
+
     generateTileGrid();
     generateCorrectTiles();
 }
 
-difficultyDownButton.addEventListener("click", difficultyDown);
-difficultyUpButton.addEventListener("click", difficultyUp);
+function calculateDifficulty(){
+    //Increases difficulty every 3rd level
+    if (level % 3 === 1){
+        //Add 3 since we start with a 3x3 grid
+        difficulty = Math.floor(level/3)+3;
+    }
+}
 
+levelResetButton.addEventListener("click", levelReset);
+levelUpButton.addEventListener("click", levelUp);
 
+generateTileGrid();
+generateCorrectTiles();
