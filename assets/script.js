@@ -1,16 +1,21 @@
 let levelResetButton = document.getElementById("levelReset");
 let levelUpButton = document.getElementById("levelUp");
 let grid = document.getElementById("grid");
+
 let tilesArray = [];
 let selectedTiles = [];
 let correctTiles = [];
+
 let level = 1;
 let maxLevel = 64;
 let difficulty = 3;
 let score = 0;
+let lives = 3;
 let userCanInteract = false;
 let userCorrectSelections = 0;
 let userWrongSelections = 0;
+
+//TILE GENERATION
 
 //Generate tilegrid
 function generateTileGrid(){
@@ -57,6 +62,8 @@ function generateCorrectTiles(){
     }
 }
 
+//TILE DISPLAY
+
 //Shows all correct tiles
 function revealCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
@@ -68,11 +75,85 @@ function revealCorrectTiles(){
 //Resets all tile colors and allows user interaction
 function hideCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
-    for(let i of tiles){
-        i.style.backgroundColor="#666";
+    for(let tile of tiles){
+        tile.style.backgroundColor="#666";
+        tile.style.border = "2px solid #222"
     }
     userCanInteract = true;
 }
+
+//Sets green border on correct tiles, used before moving to next level 
+function confirmCorrectTiles(){
+    let tiles = document.getElementsByClassName("tile");
+    for(let index of correctTiles){
+        tiles[index].style.border="4px solid green";
+    }
+}
+
+function tileInteract(){
+    //Reveals tile if it exists in correctTiles[] and user is allowed to select
+    if(userCanInteract){
+        //Index of the selected tile
+        let tileIndex = tilesArray.indexOf(this)
+        let tiles = document.getElementsByClassName("tile");
+
+        //If tile has already been selected return, else add to array of selected tiles
+        if (selectedTiles.includes(tileIndex)){ 
+            return; 
+        }
+        else
+        {
+            //Add tile to selected tiles array
+            selectedTiles.push(tileIndex);
+        }
+
+        //If selected tile is correct
+        if (correctTiles.includes(tileIndex)){
+            tiles[tileIndex].style.backgroundColor="lightgreen";
+            score++;
+            userCorrectSelections++;
+
+            //If all correct tiles selected => Disable input, mark correct tiles, wait, move to next level
+            if(userCorrectSelections >= correctTiles.length){
+                userCanInteract = false;
+                resetPlayerSelections();
+
+                confirmCorrectTiles();
+
+                setTimeout(() => {
+                    levelUp();
+                    newLevel();
+                }, 1000);
+            }
+        }
+        //If selected tile is incorrect
+        else
+        {
+            tiles[tileIndex].style.backgroundColor="lightcoral";
+            userWrongSelections++;
+            
+            //If 3 incorrect tiles selected => Disable input, show correct tiles, wait, game over
+            if(userWrongSelections >= 3){
+                userCanInteract = false;
+                resetPlayerSelections();
+
+                confirmCorrectTiles();
+
+                setTimeout(() => {
+                    levelReset();
+                }, 1000);
+            }
+        }
+    }
+}
+
+//Clears the grid, used inbetween levels
+function clearTileGrid(){
+    grid.innerHTML="";
+    correctTiles=[];
+}
+
+//LEVEL MANAGEMENT
 
 //All requirements for starting new level
 function newLevel(){
@@ -89,55 +170,6 @@ function newLevel(){
     setTimeout(() => {
         hideCorrectTiles();
     }, 2000);
-}
-
-function tileInteract(){
-    //Reveals tile if it exists in correctTiles[] and user is allowed to select
-    if(userCanInteract){
-        //Index of the selected tile
-        let tileIndex = tilesArray.indexOf(this)
-        let tiles = document.getElementsByClassName("tile");
-
-        //If tile has already been selected do nothing, else add to array of selected tiles
-        if (selectedTiles.includes(tileIndex)){ 
-            return; 
-        }
-        else
-        {
-            //Add tile to selected tiles array
-            selectedTiles.push(tileIndex);
-        }
-
-        //If selected tile is correct
-        if (correctTiles.includes(tileIndex)){
-            tiles[tileIndex].style.backgroundColor="lightgreen";
-            score++;
-            userCorrectSelections++;
-        }
-        //If selected tile is incorrect
-        else
-        {
-            tiles[tileIndex].style.backgroundColor="lightcoral";
-            userWrongSelections++;
-        }
-    }
-
-    //Disables input and waits before moving to the next level
-    if(userCorrectSelections >= correctTiles.length){
-        userCanInteract = false;
-        resetPlayerSelections();
-
-        setTimeout(() => {
-            levelUp();
-            newLevel();
-        }, 1000);
-    }
-}
-
-//Clears the grid, used inbetween levels
-function clearTileGrid(){
-    grid.innerHTML="";
-    correctTiles=[];
 }
 
 //Increases level
@@ -158,8 +190,7 @@ function levelReset(){
     newLevel();
 }
 
-
-//Resets amount of selected tiles
+//Resets selected tiles
 function resetPlayerSelections(){
     selectedTiles = [];
     userCorrectSelections = 0;
@@ -175,7 +206,19 @@ function calculateDifficulty(){
     }
 }
 
-levelResetButton.addEventListener("click", levelReset);
-levelUpButton.addEventListener("click", levelUp);
+//DEBUG FUNCTIONS
+levelResetButton.addEventListener("click", debuglevelReset);
+levelUpButton.addEventListener("click", debuglevelUp);
+
+function debuglevelUp(){
+    clearTimeout();
+    levelUp();
+    newLevel();
+}
+
+function debuglevelReset(){
+    clearTimeout();
+    levelReset();
+}
 
 newLevel();
