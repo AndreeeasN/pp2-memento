@@ -36,7 +36,6 @@ function generateTileGrid(){
 
             let newTile = document.createElement('div');
             newTile.className="tile";
-            //newTile.innerText=`${i + 1}|${j + 1}`
             newTile.addEventListener("click", tileInteract);
 
             grid.appendChild(newTile);
@@ -197,21 +196,26 @@ function resetPlayerSelections(){
 
 //Difficulty is used for grid size (3 is 3x3, 4 is 4x4 etc.)
 function calculateDifficulty(){
-    switch(level){
-        //Easiest difficulty lasts for 2 levels
-        case level <= 2:
+    //Easiest difficulty lasts for 2 levels
+    if (level <= 2){
         difficulty = 3;
-        break;
-        //Second difficulty last for 3 levels
-        case level <= 5:
-        difficulty = 4;
-        break;
-        //The rest increase every 4 levels
-        default:
-        //Add 3 since we started with a 3x3 grid
-        difficulty = Math.floor(level/4)+3;
+    }//Second difficulty lasts for 3 levels
+    else if(level <= 5){
+        difficulty = 4
+    }else{
+        //All subsequent difficulties increase every 4 levels (+3 since we start with a 3x3 grid)
+        difficulty = Math.ceil((level - 1)/ 4) + 3;
     }
     return difficulty;
+}
+
+//GAME START / END
+function gameStart(){
+
+}
+
+function gameOver(){
+    
 }
 
 //DEBUG FUNCTIONS
