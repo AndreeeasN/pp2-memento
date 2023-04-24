@@ -8,7 +8,6 @@ let correctTiles = [];
 
 let level = 1;
 let maxLevel = 64;
-let difficulty = 3;
 let score = 0;
 let lives = 3;
 let userCanInteract = false;
@@ -27,6 +26,7 @@ function generateTileGrid(){
     clearTileGrid();
 
     //Sets the grid size to fit all tiles (difficulty decides grid size, difficulty*difficulty)
+    let difficulty = calculateDifficulty();
     grid.style.gridTemplateColumns = `repeat(${difficulty}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${difficulty}, 1fr)`;
 
@@ -36,7 +36,7 @@ function generateTileGrid(){
 
             let newTile = document.createElement('div');
             newTile.className="tile";
-            newTile.innerText=`${i + 1}|${j + 1}`
+            //newTile.innerText=`${i + 1}|${j + 1}`
             newTile.addEventListener("click", tileInteract);
 
             grid.appendChild(newTile);
@@ -176,7 +176,6 @@ function newLevel(){
 function levelUp(){
     if(level<maxLevel){
         level++;
-        calculateDifficulty();
     }
 }
 
@@ -184,7 +183,6 @@ function levelUp(){
 function levelReset(){
     if(level>1){
         level=1;
-        calculateDifficulty();
     }
     resetPlayerSelections();
     newLevel();
@@ -199,11 +197,21 @@ function resetPlayerSelections(){
 
 //Difficulty is used for grid size (3 is 3x3, 4 is 4x4 etc.)
 function calculateDifficulty(){
-    //Increases difficulty every 3rd level
-    if (level % 3 === 1){
-        //Add 3 since we start with a 3x3 grid
-        difficulty = Math.floor(level/3)+3;
+    switch(level){
+        //Easiest difficulty lasts for 2 levels
+        case level <= 2:
+        difficulty = 3;
+        break;
+        //Second difficulty last for 3 levels
+        case level <= 5:
+        difficulty = 4;
+        break;
+        //The rest increase every 4 levels
+        default:
+        //Add 3 since we started with a 3x3 grid
+        difficulty = Math.floor(level/4)+3;
     }
+    return difficulty;
 }
 
 //DEBUG FUNCTIONS
@@ -220,5 +228,3 @@ function debuglevelReset(){
     clearTimeout();
     levelReset();
 }
-
-newLevel();
