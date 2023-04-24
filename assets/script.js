@@ -98,6 +98,16 @@ function tileInteract(){
         let tileIndex = tilesArray.indexOf(this)
         let tiles = document.getElementsByClassName("tile");
 
+        //If tile has already been selected do nothing, else add to array of selected tiles
+        if (selectedTiles.includes(tileIndex)){ 
+            return; 
+        }
+        else
+        {
+            //Add tile to selected tiles array
+            selectedTiles.push(tileIndex);
+        }
+
         //If selected tile is correct
         if (correctTiles.includes(tileIndex)){
             tiles[tileIndex].style.backgroundColor="lightgreen";
