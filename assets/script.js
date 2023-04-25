@@ -30,7 +30,7 @@ function generateTileGrid(){
     grid.style.gridTemplateColumns = `repeat(${difficulty}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${difficulty}, 1fr)`;
 
-    //Creates a new .tile div for every column in every row
+    //Creates a new .tile div for every column in every row and appends to grid
     for(let i = 0; i < difficulty; i++){
         for(let j = 0; j < difficulty; j++){
 
@@ -89,6 +89,7 @@ function confirmCorrectTiles(){
     }
 }
 
+//All tile interactions
 function tileInteract(){
     //Reveals tile if it exists in correctTiles[] and user is allowed to select
     if(userCanInteract){
@@ -109,8 +110,9 @@ function tileInteract(){
         //If selected tile is correct
         if (correctTiles.includes(tileIndex)){
             tiles[tileIndex].style.backgroundColor="lightgreen";
-            score++;
             userCorrectSelections++;
+            score++;
+            updateScore();
 
             //If all correct tiles selected => Disable input, mark correct tiles, wait, move to next level
             if(userCorrectSelections >= correctTiles.length){
@@ -137,8 +139,9 @@ function tileInteract(){
                 resetPlayerSelections();
                 confirmCorrectTiles();
                 lives--;
-                generateLives();
+                updateLives();
 
+                //If player still has lives left retry level, else game over
                 if(lives){
                     setTimeout(() => {
                         newLevel();
@@ -219,7 +222,7 @@ function calculateDifficulty(){
 }
 
 //Generates the 3 hearts above grid depending on player lives
-function generateLives(){
+function updateLives(){
     livesDiv = document.getElementById("lives");
     livesDiv.innerHTML = "";
 
@@ -235,13 +238,21 @@ function generateLives(){
     }
 }
 
+//Updates score
+function updateScore(){
+    scoreDiv = document.getElementById("score");
+
+    scoreDiv.innerHTML = `Score: ${score}`
+}
+
 //GAME START / END
 function gameStart(){
-    score = 0;
     lives = 3;
+    score = 0;
 
     levelReset();
-    generateLives();
+    updateLives();
+    updateScore();
 }
 
 function gameOver(){
@@ -264,5 +275,6 @@ function debuglevelReset(){
 
     clearTimeout();
     levelReset();
-    generateLives();
+    updateLives();
+    updateScore();
 }
