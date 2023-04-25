@@ -131,16 +131,25 @@ function tileInteract(){
             tiles[tileIndex].style.backgroundColor="lightcoral";
             userWrongSelections++;
             
-            //If 3 incorrect tiles selected => Disable input, show correct tiles, wait, game over
+            //If 3 incorrect tiles selected => Disable input, show correct tiles, wait, retry level
             if(userWrongSelections >= 3){
                 userCanInteract = false;
                 resetPlayerSelections();
-
                 confirmCorrectTiles();
+                lives--;
+                generateLives();
 
-                setTimeout(() => {
-                    levelReset();
-                }, 1000);
+                if(lives){
+                    setTimeout(() => {
+                        newLevel();
+                    }, 1000);
+                }else{
+                    setTimeout(() => {
+                        gameOver();
+                    }, 1000);
+                }
+
+                
             }
         }
     }
@@ -209,13 +218,33 @@ function calculateDifficulty(){
     return difficulty;
 }
 
+//Generates the 3 hearts above grid depending on player lives
+function generateLives(){
+    livesDiv = document.getElementById("lives");
+    livesDiv.innerHTML = "";
+
+    let tempLives = lives;
+    for(let i = 0; i < 3; i++){
+        if(tempLives){
+            livesDiv.innerHTML+=`<i class="fa-solid fa-heart"></i>`
+            tempLives--;
+        }else{
+            livesDiv.innerHTML+=`<i class="fa-solid fa-heart-crack"></i>`
+        }
+    }
+}
+
 //GAME START / END
 function gameStart(){
+    score = 0;
+    lives = 3;
 
+    levelReset();
+    generateLives();
 }
 
 function gameOver(){
-    
+    debuglevelReset();
 }
 
 //DEBUG FUNCTIONS
@@ -229,6 +258,10 @@ function debuglevelUp(){
 }
 
 function debuglevelReset(){
+    score = 0;
+    lives = 3;
+    
     clearTimeout();
     levelReset();
+    generateLives();
 }

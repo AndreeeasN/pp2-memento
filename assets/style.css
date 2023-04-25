@@ -3,11 +3,12 @@
 }
 
 body{
+    color: white;
     background-color: #222;
 }
 
 /* Game containers */
-#playfield{
+#grid-container{
     height: 460px;
     width: 460px;
     background-color:#444;
@@ -19,6 +20,21 @@ body{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: 100%;
+    max-width: 100%;
+}
+
+#playfield{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:#444;
+}
+
+#lives{
+    height: 3rem;
+    display: flex;
+    font-size: 3rem;
+    margin-top: 20px;
 }
 
 /* generated tiles */
