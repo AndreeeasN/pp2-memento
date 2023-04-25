@@ -225,11 +225,12 @@ function generateLives(){
 
     let tempLives = lives;
     for(let i = 0; i < 3; i++){
+        //If player has lives generate a heart, otherwise a gray broken heart
         if(tempLives){
-            livesDiv.innerHTML+=`<i class="fa-solid fa-heart"></i>`
+            livesDiv.innerHTML+=`<i class="fa-solid fa-heart "></i>`
             tempLives--;
         }else{
-            livesDiv.innerHTML+=`<i class="fa-solid fa-heart-crack"></i>`
+            livesDiv.innerHTML+=`<i class="fa-solid fa-heart-crack" style="color: #666"></i>`
         }
     }
 }
@@ -260,7 +261,7 @@ function debuglevelUp(){
 function debuglevelReset(){
     score = 0;
     lives = 3;
-    
+
     clearTimeout();
     levelReset();
     generateLives();
