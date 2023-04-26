@@ -1,5 +1,3 @@
-let grid = document.getElementById("grid");
-
 let tilesArray = [];
 let selectedTiles = [];
 let correctTiles = [];
@@ -16,6 +14,8 @@ let userWrongSelections = 0;
 
 //Generate tilegrid
 function generateTileGrid(){
+    let grid = document.getElementById("grid");
+
     //Ensures user can't interact with tiles and resets selections
     userCanInteract = false;
     resetPlayerSelections();
@@ -127,6 +127,7 @@ function tileInteract(){
         //If selected tile is incorrect
         else
         {
+            //Set color to red and increase "wrong" counter
             tiles[tileIndex].style.backgroundColor="lightcoral";
             userWrongSelections++;
             
@@ -141,14 +142,12 @@ function tileInteract(){
                 if(lives){
                     setTimeout(() => {
                         newLevel();
-                    }, 1000);
+                    }, 2000);
                 }else{
                     setTimeout(() => {
                         gameOver();
-                    }, 1000);
+                    }, 2000);
                 }
-
-                
             }
         }
     }
@@ -279,25 +278,35 @@ function gameStart(){
 }
 
 function gameOver(){
-    debugResetLevel();
+    startUp();
 }
 
-//DEBUG FUNCTIONS
-let resetLevelButton = document.getElementById("resetLevel");
-let levelUpButton = document.getElementById("levelUp");
+//Is called on page load, creates empty playing field with play button
+function startUp(){
+    generateTileGrid();
+    updateLevelCounter();
+    updateLivesCounter();
+    updateScoreCounter();
+    userCanInteract = false;
 
-resetLevelButton.addEventListener("click", debugResetLevel);
+    //Adds gameStart() to all tiles
+    tiles = document.getElementsByClassName("tile")
+    for (let tile of tiles){
+        tile.addEventListener("click",gameStart)
+    }
+    tiles[1].innerHTML = `Click to play!`
+    tiles[4].innerHTML = `<i class="fa-solid fa-play"></i>`
+    tiles[4].style.fontSize = "4em";
+}
+
+window.onload = startUp;
+
+//DEBUG FUNCTIONS
+let levelUpButton = document.getElementById("levelUp");
 levelUpButton.addEventListener("click", debugLevelUp);
 
 function debugLevelUp(){
     clearTimeout();
     levelUp();
     newLevel();
-}
-
-function debugResetLevel(){
-    clearTimeout();
-    resetLives();
-    resetScore();
-    resetLevel();
 }

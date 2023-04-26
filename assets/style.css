@@ -1,5 +1,9 @@
+/* font - Roboto Slab */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Oswald&family=Roboto+Slab&display=swap');
+
 *{
     margin: 0;
+    font-family: 'Roboto Slab', serif;;
 }
 
 body{
@@ -8,6 +12,7 @@ body{
 }
 
 h1{
+    margin: 15px 0 0;
     font-size: 2.5em;
 }
 
@@ -15,7 +20,7 @@ h1{
 #grid-container{
     height: 460px;
     width: 460px;
-    padding: 1em 0;
+    padding: 15px 0;
 }
 
 #grid{
@@ -25,15 +30,12 @@ h1{
     max-width: 100%;
 }
 
-#playfield{
+#game-container{
+    height: 630px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color:#444;
-}
-
-#level{
-    margin: 1em 0 0;
 }
 
 #lives{
@@ -43,14 +45,10 @@ h1{
     font-size: 3rem;
 }
 
-#score{
-    font-size: 1em;
-    height:1em;
-}
 /* generated tiles */
 .tile{
-    height: auto;
-    width: auto;
+    display: flex;
+    flex-flow: column;
     text-align: center;
     justify-content: center;
     background-color: #666;
@@ -58,5 +56,14 @@ h1{
     border-radius: 20%;
     margin: 2px;
     overflow: hidden;
-    font-size: small;
+    font-size: 2em;
+}
+
+#overlay-play-button{
+    position: absolute;
+    top: 50%;
+    height: 3rem;
+    width: 6rem;
+    border: 2px solid #222;
+    border-radius: 20px;
 }
