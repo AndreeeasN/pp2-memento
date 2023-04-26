@@ -1,5 +1,3 @@
-let levelResetButton = document.getElementById("levelReset");
-let levelUpButton = document.getElementById("levelUp");
 let grid = document.getElementById("grid");
 
 let tilesArray = [];
@@ -111,8 +109,7 @@ function tileInteract(){
         if (correctTiles.includes(tileIndex)){
             tiles[tileIndex].style.backgroundColor="lightgreen";
             userCorrectSelections++;
-            score++;
-            updateScore();
+            increaseScore();
 
             //If all correct tiles selected => Disable input, mark correct tiles, wait, move to next level
             if(userCorrectSelections >= correctTiles.length){
@@ -138,8 +135,7 @@ function tileInteract(){
                 userCanInteract = false;
                 resetPlayerSelections();
                 confirmCorrectTiles();
-                lives--;
-                updateLives();
+                decreaseLives();
 
                 //If player still has lives left retry level, else game over
                 if(lives){
@@ -172,15 +168,15 @@ function newLevel(){
     generateTileGrid();
     generateCorrectTiles();
 
-    //Waits before revealing all correct tiles
+    //Waits before revealing all correct tiles,
     setTimeout(() => {
         revealCorrectTiles();
-    }, 500);
+    }, 1000);
 
-    //Waits before hiding tiles
+    //Waits before hiding tiles, slightly increases every level
     setTimeout(() => {
         hideCorrectTiles();
-    }, 2000);
+    }, 2000+(level*100));
 }
 
 //Increases level
@@ -188,15 +184,22 @@ function levelUp(){
     if(level<maxLevel){
         level++;
     }
+    updateLevelCounter();
 }
 
 //Resets level, used on restart
-function levelReset(){
+function resetLevel(){
     if(level>1){
         level=1;
     }
-    resetPlayerSelections();
+    updateLevelCounter();
     newLevel();
+}
+
+//Updates the level counter
+function updateLevelCounter(){
+    levelDiv = document.getElementById("level");
+    levelDiv.innerHTML = `<h1>Level ${level}</h1>`
 }
 
 //Resets selected tiles
@@ -221,8 +224,20 @@ function calculateDifficulty(){
     return difficulty;
 }
 
+//Decreases life by 1, used on 3 wrong tile selections
+function decreaseLives(){
+    lives--;
+    updateLivesCounter();
+}
+
+//Sets lives to 3, used on reset
+function resetLives(){
+    lives = 3;
+    updateLivesCounter();
+}
+
 //Generates the 3 hearts above grid depending on player lives
-function updateLives(){
+function updateLivesCounter(){
     livesDiv = document.getElementById("lives");
     livesDiv.innerHTML = "";
 
@@ -238,43 +253,51 @@ function updateLives(){
     }
 }
 
-//Updates score
-function updateScore(){
-    scoreDiv = document.getElementById("score");
+//Increases score by 1 and updates score counter
+function increaseScore(){
+    score++;
+    updateScoreCounter();
+}
 
+//Sets score to specific value and updates score counter
+function resetScore(){
+    score = 0;
+    updateScoreCounter();
+}
+
+//Updates score counter to match current score
+function updateScoreCounter(){
+    scoreDiv = document.getElementById("score");
     scoreDiv.innerHTML = `Score: ${score}`
 }
 
 //GAME START / END
 function gameStart(){
-    lives = 3;
-    score = 0;
-
-    levelReset();
-    updateLives();
-    updateScore();
+    resetLives();
+    resetScore();
+    resetLevel();
 }
 
 function gameOver(){
-    debuglevelReset();
+    debugResetLevel();
 }
 
 //DEBUG FUNCTIONS
-levelResetButton.addEventListener("click", debuglevelReset);
-levelUpButton.addEventListener("click", debuglevelUp);
+let resetLevelButton = document.getElementById("resetLevel");
+let levelUpButton = document.getElementById("levelUp");
 
-function debuglevelUp(){
+resetLevelButton.addEventListener("click", debugResetLevel);
+levelUpButton.addEventListener("click", debugLevelUp);
+
+function debugLevelUp(){
     clearTimeout();
     levelUp();
     newLevel();
 }
 
-function debuglevelReset(){
-    score = 0;
-    lives = 3;
-
+function debugResetLevel(){
     clearTimeout();
-    levelReset();
-    updateLives();
-    updateScore();
+    resetLives();
+    resetScore();
+    resetLevel();
 }
