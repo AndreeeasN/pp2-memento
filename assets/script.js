@@ -192,7 +192,6 @@ function resetLevel(){
         level=1;
     }
     updateLevelCounter();
-    newLevel();
 }
 
 //Updates the level counter
@@ -275,6 +274,7 @@ function gameStart(){
     resetLives();
     resetScore();
     resetLevel();
+    newLevel();
 }
 
 function gameOver(){
@@ -283,10 +283,10 @@ function gameOver(){
 
 //Is called on page load, creates empty playing field with play button
 function startUp(){
+    resetLevel();
+    resetLives();
+    resetScore();
     generateTileGrid();
-    updateLevelCounter();
-    updateLivesCounter();
-    updateScoreCounter();
     userCanInteract = false;
 
     //Adds gameStart() to all tiles
