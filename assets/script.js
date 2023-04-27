@@ -105,50 +105,62 @@ function tileInteract(){
             selectedTiles.push(tileIndex);
         }
 
-        //If selected tile is correct
+        //If selected tile is correct (tile index exists in correctTiles[])
         if (correctTiles.includes(tileIndex)){
-            tiles[tileIndex].style.backgroundColor="lightgreen";
-            userCorrectSelections++;
-            increaseScore();
-
-            //If all correct tiles selected => Disable input, mark correct tiles, wait, move to next level
-            if(userCorrectSelections >= correctTiles.length){
-                userCanInteract = false;
-                resetPlayerSelections();
-
-                confirmCorrectTiles();
-
-                setTimeout(() => {
-                    levelUp();
-                    newLevel();
-                }, 1000);
-            }
+            correctTileSelection(tiles, tileIndex);
         }
         //If selected tile is incorrect
         else
         {
-            //Set color to red and increase "wrong" counter
-            tiles[tileIndex].style.backgroundColor="lightcoral";
-            userWrongSelections++;
-            
-            //If 3 incorrect tiles selected => Disable input, show correct tiles, wait, retry level
-            if(userWrongSelections >= 3){
-                userCanInteract = false;
-                resetPlayerSelections();
-                confirmCorrectTiles();
-                decreaseLives();
+            wrongTileSelection(tiles, tileIndex);
+        }
+    }
+}
 
-                //If player still has lives left retry level, else game over
-                if(lives){
-                    setTimeout(() => {
-                        newLevel();
-                    }, 2000);
-                }else{
-                    setTimeout(() => {
-                        gameOver();
-                    }, 2000);
-                }
-            }
+//On correct tile selection, used in tileInteract();
+function correctTileSelection(tiles, tileIndex){
+    //Sets tile to green and increases score
+    tiles[tileIndex].style.backgroundColor="lightgreen";
+    userCorrectSelections++;
+    increaseScore();
+
+    //If all correct tiles selected => Disable input, mark correct tiles, wait, move to next level
+    if(userCorrectSelections >= correctTiles.length){
+        userCanInteract = false;
+        resetPlayerSelections();
+
+        confirmCorrectTiles();
+
+        setTimeout(() => {
+            levelUp();
+            newLevel();
+        }, 1000);
+    }
+}
+
+function wrongTileSelection(tiles, tileIndex){
+    //Set color to red and increase "wrong" counter
+    tiles[tileIndex].style.backgroundColor="lightcoral";
+    userWrongSelections++;
+    
+    //If 3 incorrect tiles selected => Disable input, show correct tiles, wait, retry level
+    if(userWrongSelections >= 3){
+        userCanInteract = false;
+        resetPlayerSelections();
+        confirmCorrectTiles();
+        decreaseLives();
+
+        //If player still has lives left retry level, else game over
+        if(lives){
+            setTimeout(() => {
+                newLevel();
+            }, 2000);
+        }
+        else
+        {
+            setTimeout(() => {
+                gameOver();
+            }, 2000);
         }
     }
 }
@@ -245,7 +257,9 @@ function updateLivesCounter(){
         if(tempLives){
             livesDiv.innerHTML+=`<i class="fa-solid fa-heart "></i>`
             tempLives--;
-        }else{
+        }
+        else
+        {
             livesDiv.innerHTML+=`<i class="fa-solid fa-heart-crack" style="color: #666"></i>`
         }
     }
