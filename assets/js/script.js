@@ -376,8 +376,9 @@ function generateHowToPlay(){
     <div id="how-to-play">
         <h1>How to play</h1>
         <ol>
-            <li>Every level a pattern of tiles will flash white. Memorize these tiles!</li>
+            <li>A pattern of tiles will flash white. Memorize these tiles!</li>
             <li>Once hidden, click as many tiles as you can remember.</li>
+            <li>Picking the wrong tile 3 times will cost you a life.</li>
             <li>Levels get progressively more difficult, make it as far as you can!</li>
         </ol>
         <h2>Start</h2>
