@@ -12,7 +12,10 @@ let userWrongSelections = 0;
 
 //TILE GENERATION
 
-//Generate tilegrid
+
+/**
+ * Generates tilegrid, size is based on difficulty
+ */
 function generateTileGrid(){
     let grid = document.getElementById("grid");
 
@@ -23,7 +26,7 @@ function generateTileGrid(){
     //Clears grid before creating new tiles
     clearTileGrid();
 
-    //Sets the grid size to fit all tiles (difficulty decides grid size, difficulty*difficulty)
+    //Sets the grid size to fit all tiles (grid size is difficulty*difficulty)
     let difficulty = calculateDifficulty();
     grid.style.gridTemplateColumns = `repeat(${difficulty}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${difficulty}, 1fr)`;
@@ -44,7 +47,10 @@ function generateTileGrid(){
     tilesArray = Array.from(document.getElementsByClassName("tile"));
 }
 
-//Generate an array of correct tile numbers to be remembered
+
+/**
+ *Generate an array of correct tile numbers for user to remembere
+ */
 function generateCorrectTiles(){
     //The amount of correct tiles needed, we'll start with 2 tiles on level 1
     let neededTiles = level + 1;
@@ -61,7 +67,9 @@ function generateCorrectTiles(){
 
 //TILE DISPLAY
 
-//Shows all correct tiles
+/**
+ *  Reveals all correct tiles by setting their background color to white
+ */
 function revealCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
     for(let index of correctTiles){
@@ -69,7 +77,9 @@ function revealCorrectTiles(){
     }
 }
 
-//Resets all tile colors and allows user interaction
+/**
+ * Resets all tile colors and allows user interaction
+ */
 function hideCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
     for(let tile of tiles){
@@ -79,7 +89,9 @@ function hideCorrectTiles(){
     userCanInteract = true;
 }
 
-//Sets green border on correct tiles, used before moving to next level 
+/**
+ * Sets green border on correct tiles, used before moving to next level 
+ */
 function confirmCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
     for(let index of correctTiles){
@@ -87,7 +99,10 @@ function confirmCorrectTiles(){
     }
 }
 
-//All tile interactions
+/**
+ * Used for all tile interactions.
+ * Checks if selection is valid and calls correctTileSelection() if correct, wrongTileSelection() if incorrect
+ */
 function tileInteract(){
     //Reveals tile if it exists in correctTiles[] and user is allowed to select
     if(userCanInteract){
@@ -117,7 +132,12 @@ function tileInteract(){
     }
 }
 
-//On correct tile selection, used in tileInteract();
+
+/**
+ * Called on correct tile selection, used primarily in tileInteract();
+ * @param {HTMLCollectionOf<Element>} tiles Array of all tile HTML elements
+ * @param {number} tileIndex The index of selected tile
+ */
 function correctTileSelection(tiles, tileIndex){
     //Sets tile to green and increases score
     tiles[tileIndex].style.backgroundColor="lightgreen";
@@ -138,6 +158,11 @@ function correctTileSelection(tiles, tileIndex){
     }
 }
 
+/**
+ * Called on incorrect tile selection, used primarily in tileInteract();
+ * @param {HTMLCollectionOf<Element>} tiles Array of all tile HTML elements
+ * @param {number} tileIndex The index of selected tile
+ */
 function wrongTileSelection(tiles, tileIndex){
     //Set color to red and increase "wrong" counter
     tiles[tileIndex].style.backgroundColor="lightcoral";
@@ -165,7 +190,10 @@ function wrongTileSelection(tiles, tileIndex){
     }
 }
 
-//Clears the grid, used inbetween levels
+
+/**
+ * Clears the tile grid, used inbetween levels
+ */
 function clearTileGrid(){
     grid.innerHTML="";
     correctTiles=[];
@@ -173,7 +201,10 @@ function clearTileGrid(){
 
 //LEVEL MANAGEMENT
 
-//All requirements for starting new level
+/**
+ * All requirements for starting new level.
+ * Generates tilegrid and correct tiles -> reveals correct tiles -> hides correct tiles
+ */
 function newLevel(){
     //Generates grid
     generateTileGrid();
@@ -190,7 +221,9 @@ function newLevel(){
     }, 2000+(level*100));
 }
 
-//Increases level
+/**
+ * Increases level and calls updateLevelCounter()
+ */
 function levelUp(){
     if(level<maxLevel){
         level++;
@@ -198,7 +231,9 @@ function levelUp(){
     updateLevelCounter();
 }
 
-//Resets level, used on restart
+/**
+ * Resets level to 1 and calls updateLevelCounter(), used on restart
+ */
 function resetLevel(){
     if(level>1){
         level=1;
@@ -206,20 +241,27 @@ function resetLevel(){
     updateLevelCounter();
 }
 
-//Updates the level counter
+/**
+ * Updates the level counter
+ */
 function updateLevelCounter(){
     levelDiv = document.getElementById("level");
     levelDiv.innerHTML = `<h1>Level ${level}</h1>`
 }
 
-//Resets selected tiles
+/**
+ * Resets selected tiles and correct/incorrect selections
+ */
 function resetPlayerSelections(){
     selectedTiles = [];
     userCorrectSelections = 0;
     userWrongSelections = 0;
 }
 
-//Difficulty is used for grid size (3 is 3x3, 4 is 4x4 etc.)
+/**
+ * Calculates difficulty based on current level
+ * @returns Difficulty, used for grid size (3 is 3x3, 4 is 4x4 etc.)
+ */
 function calculateDifficulty(){
     //Easiest difficulty lasts for 2 levels
     if (level <= 2){
@@ -234,19 +276,25 @@ function calculateDifficulty(){
     return difficulty;
 }
 
-//Decreases life by 1, used on 3 wrong tile selections
+/**
+ * Decreases life by 1, used on 3 wrong tile selections
+ */
 function decreaseLives(){
     lives--;
     updateLivesCounter();
 }
 
-//Sets lives to 3, used on reset
+/**
+ * Sets lives to 3, used on reset
+ */
 function resetLives(){
     lives = 3;
     updateLivesCounter();
 }
 
-//Generates the 3 hearts above grid depending on player lives
+/**
+ * Generates the 3 hearts in #lives div based on player lives
+ */
 function updateLivesCounter(){
     livesDiv = document.getElementById("lives");
     livesDiv.innerHTML = "";
@@ -265,25 +313,36 @@ function updateLivesCounter(){
     }
 }
 
-//Increases score by 1 and updates score counter
+/**
+ * Increases score by 1 and updates score counter
+*/
 function increaseScore(){
     score++;
     updateScoreCounter();
 }
 
-//Sets score to specific value and updates score counter
+/**
+ * Resets score to 0 and updates score counter
+ */
 function resetScore(){
     score = 0;
     updateScoreCounter();
 }
 
-//Updates score counter to match current score
+/**
+ * Updates score counter to match current score
+ */
 function updateScoreCounter(){
     scoreDiv = document.getElementById("score");
     scoreDiv.innerHTML = `Score: ${score}`
 }
 
 //GAME START / END
+
+/**
+ * Used for starting a new game.
+ * Resets all counters and starts a new level
+ */
 function gameStart(){
     resetLives();
     resetScore();
@@ -291,11 +350,18 @@ function gameStart(){
     newLevel();
 }
 
+/**
+ * Used for ending current game.
+ * Opens window displaying score and retry button.
+ */
 function gameOver(){
+    // PLACE RETRY WINDOW HEEEEEEEEREEEEEEEEE
     startUp();
 }
 
-//Is called on page load, creates empty playing field with play button
+/**
+ * Is called on page load, creates empty playing field with play button
+ */
 function startUp(){
     resetLevel();
     resetLives();
