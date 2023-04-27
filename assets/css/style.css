@@ -16,7 +16,54 @@ h1{
     font-size: 2.5em;
 }
 
+/* how to play */
+#how-to-play{
+    display: contents;
+    text-align: center;
+}
+
+#how-to-play ol, #how-to-play ul{
+    margin: 25px 0;
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+#how-to-play li{
+    margin-bottom: 5px;
+}
+
+/* play button */
+#play-button{
+    height: 150px;
+    width: 150px;
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    background-color: #666;
+    border: 2px solid #222;
+    border-radius: 20%;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 3em;
+}
+
+
 /* Game containers */
+#game-container {
+    height: 630px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #444;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+  
 #grid-container{
     height: 460px;
     width: 460px;
@@ -28,14 +75,6 @@ h1{
     grid-template-columns: repeat(2, 1fr);
     height: 100%;
     max-width: 100%;
-}
-
-#game-container{
-    height: 630px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color:#444;
 }
 
 #lives{
@@ -57,13 +96,4 @@ h1{
     margin: 2px;
     overflow: hidden;
     font-size: 2em;
-}
-
-#overlay-play-button{
-    position: absolute;
-    top: 50%;
-    height: 3rem;
-    width: 6rem;
-    border: 2px solid #222;
-    border-radius: 20px;
 }

@@ -344,6 +344,8 @@ function updateScoreCounter(){
  * Resets all counters and starts a new level
  */
 function gameStart(){
+    generateGameElements()
+
     resetLives();
     resetScore();
     resetLevel();
@@ -363,30 +365,59 @@ function gameOver(){
  * Is called on page load, creates empty playing field with play button
  */
 function startUp(){
-    resetLevel();
-    resetLives();
-    resetScore();
-    generateTileGrid();
+    generateHowToPlay()
     userCanInteract = false;
 
-    //Adds gameStart() to all tiles
-    tiles = document.getElementsByClassName("tile")
-    for (let tile of tiles){
-        tile.addEventListener("click",gameStart)
-    }
-    tiles[1].innerHTML = `Click to play!`
-    tiles[4].innerHTML = `<i class="fa-solid fa-play"></i>`
-    tiles[4].style.fontSize = "4em";
+    // //Adds gameStart() to all tiles
+    // tiles = document.getElementsByClassName("tile")
+    // for (let tile of tiles){
+    //     tile.addEventListener("click",gameStart)
+    // }
+    // tiles[1].innerHTML = `Click to play!`
+    // tiles[4].innerHTML = `<i class="fa-solid fa-play"></i>`
+    // tiles[4].style.fontSize = "4em";
+
+    
 }
 
+/**
+ * Replaces contents of game-container with instructions on how to play and a play button
+ */
+function generateHowToPlay(){
+    let gameContainer = document.getElementById("game-container");
+    gameContainer.innerHTML =`
+    <div id="how-to-play">
+        <h1>How to play</h1>
+        <ol>
+            <li>Every level a pattern of tiles will flash white. Memorize these tiles!</li>
+            <li>Once hidden, click as many tiles as you can remember.</li>
+            <li>Levels get progressively more difficult, make it as far as you can!</li>
+        </ol>
+        <h2>Start</h2>
+        <div id="play-button">
+            <i class="fa-solid fa-play"></i>
+        </div>
+    </div>
+    `
+    let playButton = document.getElementById("play-button");
+    playButton.addEventListener("click", gameStart);
+}
+
+/**
+ * Replaces contents of game-container with the required elements to play the game
+ */
+function generateGameElements(){
+    let gameContainer = document.getElementById("game-container");
+    gameContainer.innerHTML =`
+    <div id="level"></div>
+    <div id="score"></div>
+    <div id="lives"></div>
+    <div id="grid-container">
+        <div id="grid"></div>
+    </div>
+    `
+}
+
+
+//Runs startUp() on page load
 window.onload = startUp;
-
-//DEBUG FUNCTIONS
-let levelUpButton = document.getElementById("levelUp");
-levelUpButton.addEventListener("click", debugLevelUp);
-
-function debugLevelUp(){
-    clearTimeout();
-    levelUp();
-    newLevel();
-}
