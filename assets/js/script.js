@@ -344,7 +344,7 @@ function updateScoreCounter(){
  * Resets all counters and starts a new level
  */
 function gameStart(){
-    generateGameElements()
+    generateGameElements();
 
     resetLives();
     resetScore();
@@ -357,27 +357,14 @@ function gameStart(){
  * Opens window displaying score and retry button.
  */
 function gameOver(){
-    // PLACE RETRY WINDOW HEEEEEEEEREEEEEEEEE
-    startUp();
+    generateRetryWindow();
 }
 
 /**
  * Is called on page load, creates empty playing field with play button
  */
 function startUp(){
-    generateHowToPlay()
-    userCanInteract = false;
-
-    // //Adds gameStart() to all tiles
-    // tiles = document.getElementsByClassName("tile")
-    // for (let tile of tiles){
-    //     tile.addEventListener("click",gameStart)
-    // }
-    // tiles[1].innerHTML = `Click to play!`
-    // tiles[4].innerHTML = `<i class="fa-solid fa-play"></i>`
-    // tiles[4].style.fontSize = "4em";
-
-    
+    generateHowToPlay();
 }
 
 /**
@@ -394,13 +381,14 @@ function generateHowToPlay(){
             <li>Levels get progressively more difficult, make it as far as you can!</li>
         </ol>
         <h2>Start</h2>
-        <div id="play-button">
+        <div class="play-button">
             <i class="fa-solid fa-play"></i>
         </div>
     </div>
     `
-    let playButton = document.getElementById("play-button");
-    playButton.addEventListener("click", gameStart);
+    //Calls gameStart() on play button click
+    let playButton = document.getElementsByClassName("play-button");
+    playButton[0].addEventListener("click", gameStart);
 }
 
 /**
@@ -418,6 +406,39 @@ function generateGameElements(){
     `
 }
 
+/**
+ * Replaces contents of game-container with achieved score and button to retry
+ */
+function generateRetryWindow(){
+    let gameContainer = document.getElementById("game-container");
+    gameContainer.innerHTML =`
+    <div id="how-to-play">
+        <h1>Score: ${score}</h1>
+        
+        <div id="retry-buttons">
+            <div>
+                <h2>Go back</h2>
+                <div class="play-button" id="return-button">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+            </div>
+            <div>
+                <h2>Retry?</h2>
+                <div class="play-button" id="retry-button">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+    //Calls generateHowToPlay() on return button click
+    let returnButton = document.getElementById("return-button");
+    returnButton.addEventListener("click", generateHowToPlay);
+
+    //Calls gameStart() on retry button click
+    let retryButton = document.getElementById("retry-button");
+    retryButton.addEventListener("click", gameStart);
+}
 
 //Runs startUp() on page load
 window.onload = startUp;

@@ -12,8 +12,12 @@ body{
 }
 
 h1{
-    margin: 15px 0 0;
+    margin: 15px 0;
     font-size: 2.5em;
+}
+
+h2{
+    margin: 15px 0 0;
 }
 
 /* how to play */
@@ -23,7 +27,7 @@ h1{
 }
 
 #how-to-play ol, #how-to-play ul{
-    margin: 25px 0;
+    margin: 25px 0 0;
     padding-bottom: 5px;
     text-align: left;
 }
@@ -32,8 +36,16 @@ h1{
     margin-bottom: 5px;
 }
 
-/* play button */
-#play-button{
+/* retry window*/
+#retry-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* play buttons (play, retry, how to play) */
+.play-button{
     height: 150px;
     width: 150px;
     display: flex;
@@ -46,6 +58,7 @@ h1{
     flex-direction: column;
     justify-content: center;
     font-size: 3em;
+    margin: 0 15px;
 }
 
 
