@@ -151,3 +151,50 @@ footer a{
 footer a:hover{
     color:#66C7FF;
 }
+
+
+/* Media queries */
+/* 800px and down */
+@media screen and (max-width: 800px) {
+    /* footer */
+    footer ul{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    #footer-links{
+        margin: 15px 0 0;
+    }
+}
+
+/* 460px and down */
+@media screen and (max-width: 460px) {
+    
+    /* header */
+    #logo-container{
+        justify-content: center;
+    }
+
+    /* play area */
+    #grid-container{
+        width: 100%;
+        padding: 15px 0;
+        max-height: 100vw;
+    }
+
+    #how-to-play li{
+        font-size: small;
+    }
+    
+    #how-to-play h1{
+        font-size: 2em;
+        margin: 10px 0 0;
+    }
+
+    .play-button{
+        height: 100px;
+        width: 100px;
+    }
+    
+}
