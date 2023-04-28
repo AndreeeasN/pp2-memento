@@ -38,16 +38,15 @@ function generateTileGrid(){
 
             let newTile = document.createElement('div');
             newTile.className="tile";
+            //Adds tileInteract() on click
             newTile.addEventListener("click", tileInteract);
 
             grid.appendChild(newTile);
         }
     }
-
     //Sets array of tiles for use in tileInteract(), as normal HTMLCollections lack the indexOf() function
     tilesArray = Array.from(document.getElementsByClassName("tile"));
 }
-
 
 /**
  *Generate an array of correct tile numbers for user to remembere
@@ -84,8 +83,8 @@ function revealCorrectTiles(){
 function hideCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
     for(let tile of tiles){
-        tile.style.backgroundColor="#666";
-        tile.style.border = "2px solid #222";
+        tile.style.backgroundColor="";
+        tile.style.border = "";
     }
     userCanInteract = true;
 }
@@ -132,7 +131,6 @@ function tileInteract(){
         }
     }
 }
-
 
 /**
  * Called on correct tile selection, used primarily in tileInteract();

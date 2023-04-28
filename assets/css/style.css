@@ -83,6 +83,10 @@ h2{
     margin: 0 15px;
 }
 
+.play-button:active{
+    background-color: #777;
+}
+
 /* Game containers */
 #game-container {
     height: 630px;
@@ -126,6 +130,9 @@ h2{
     margin: 2px;
     overflow: hidden;
     font-size: 2em;
+}
+.tile:active{
+    background-color: #777;
 }
 
 /* footer */
