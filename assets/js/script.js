@@ -4,6 +4,7 @@ let correctTiles = [];
 
 let level = 1;
 let maxLevel = 64;
+let difficulty = 3;
 let score = 0;
 let lives = 3;
 let userCanInteract = false;
@@ -11,7 +12,6 @@ let userCorrectSelections = 0;
 let userWrongSelections = 0;
 
 //TILE GENERATION
-
 
 /**
  * Generates tilegrid, size is based on difficulty
@@ -23,11 +23,12 @@ function generateTileGrid(){
     userCanInteract = false;
     resetPlayerSelections();
 
-    //Clears grid before creating new tiles
-    clearTileGrid();
+    //Clears grid and correctTiles array before creating new tiles
+    grid.innerHTML="";
+    correctTiles=[];
 
     //Sets the grid size to fit all tiles (grid size is difficulty*difficulty)
-    let difficulty = calculateDifficulty();
+    difficulty = calculateDifficulty();
     grid.style.gridTemplateColumns = `repeat(${difficulty}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${difficulty}, 1fr)`;
 
@@ -84,7 +85,7 @@ function hideCorrectTiles(){
     let tiles = document.getElementsByClassName("tile");
     for(let tile of tiles){
         tile.style.backgroundColor="#666";
-        tile.style.border = "2px solid #222"
+        tile.style.border = "2px solid #222";
     }
     userCanInteract = true;
 }
@@ -107,7 +108,7 @@ function tileInteract(){
     //Reveals tile if it exists in correctTiles[] and user is allowed to select
     if(userCanInteract){
         //Index of the selected tile
-        let tileIndex = tilesArray.indexOf(this)
+        let tileIndex = tilesArray.indexOf(this);
         let tiles = document.getElementsByClassName("tile");
 
         //If tile has already been selected return, else add to array of selected tiles
@@ -190,15 +191,6 @@ function wrongTileSelection(tiles, tileIndex){
     }
 }
 
-
-/**
- * Clears the tile grid, used inbetween levels
- */
-function clearTileGrid(){
-    grid.innerHTML="";
-    correctTiles=[];
-}
-
 //LEVEL MANAGEMENT
 
 /**
@@ -245,8 +237,8 @@ function resetLevel(){
  * Updates the level counter
  */
 function updateLevelCounter(){
-    levelDiv = document.getElementById("level");
-    levelDiv.innerHTML = `<h1>Level ${level}</h1>`
+    let levelDiv = document.getElementById("level");
+    levelDiv.innerHTML = `<h1>Level ${level}</h1>`;
 }
 
 /**
@@ -268,7 +260,7 @@ function calculateDifficulty(){
         difficulty = 3;
     }//Second difficulty lasts for 3 levels
     else if(level <= 5){
-        difficulty = 4
+        difficulty = 4;
     }else{
         //All subsequent difficulties increase every 4 levels (+3 since we start with a 3x3 grid)
         difficulty = Math.ceil((level - 1)/ 4) + 3;
@@ -296,19 +288,19 @@ function resetLives(){
  * Generates the 3 hearts in #lives div based on player lives
  */
 function updateLivesCounter(){
-    livesDiv = document.getElementById("lives");
+    let livesDiv = document.getElementById("lives");
     livesDiv.innerHTML = "";
 
     let tempLives = lives;
     for(let i = 0; i < 3; i++){
         //If player has lives generate a heart, otherwise a gray broken heart
         if(tempLives){
-            livesDiv.innerHTML+=`<i class="fa-solid fa-heart "></i>`
+            livesDiv.innerHTML+=`<i class="fa-solid fa-heart "></i>`;
             tempLives--;
         }
         else
         {
-            livesDiv.innerHTML+=`<i class="fa-solid fa-heart-crack" style="color: #666"></i>`
+            livesDiv.innerHTML+=`<i class="fa-solid fa-heart-crack" style="color: #666"></i>`;
         }
     }
 }
@@ -333,8 +325,8 @@ function resetScore(){
  * Updates score counter to match current score
  */
 function updateScoreCounter(){
-    scoreDiv = document.getElementById("score");
-    scoreDiv.innerHTML = `Score: ${score}`
+    let scoreDiv = document.getElementById("score");
+    scoreDiv.innerHTML = `Score: ${score}`;
 }
 
 //GAME START / END
@@ -386,7 +378,7 @@ function generateHowToPlay(){
             <i class="fa-solid fa-play"></i>
         </div>
     </div>
-    `
+    `;
     //Calls gameStart() on play button click
     let playButton = document.getElementsByClassName("play-button");
     playButton[0].addEventListener("click", gameStart);
@@ -404,7 +396,7 @@ function generateGameElements(){
     <div id="grid-container">
         <div id="grid"></div>
     </div>
-    `
+    `;
 }
 
 /**
@@ -431,7 +423,7 @@ function generateRetryWindow(){
             </div>
         </div>
     </div>
-    `
+    `;
     //Calls generateHowToPlay() on return button click
     let returnButton = document.getElementById("return-button");
     returnButton.addEventListener("click", generateHowToPlay);
