@@ -1,6 +1,6 @@
 # Memento - Visual Memory Test
 
-[Memento](https://andreeeasn.github.io/pp2-project/) was developed for people interested in testing or improving their visual memory skills through a short and simple browser game.
+[Memento](https://andreeeasn.github.io/pp2-memento/) was developed for people interested in testing or improving their visual memory skills through a short and simple browser game.
 In this game you'll be given a short timer to remember all highlighted tiles, and then select as many of them as you can recall.
 Get 3 incorrect tiles and lose a life, lose 3 lives and you're out.
 The levels gradually increase in difficulty, how far can you make it?
