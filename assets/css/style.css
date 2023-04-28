@@ -84,7 +84,7 @@ h2{
 }
 
 .play-button:active{
-    background-color: #777;
+    background-color: #555;
 }
 
 /* Game containers */
@@ -132,7 +132,7 @@ h2{
     font-size: 2em;
 }
 .tile:active{
-    background-color: #777;
+    background-color: #555;
 }
 
 /* footer */
