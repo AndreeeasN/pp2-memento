@@ -18,6 +18,7 @@ The levels gradually increase in difficulty, how far can you make it?
   + [How to play](#how-to-player "How to play")
   + [Game Over screen](#game-over-screen "Game Over screen")
   + [Footer](#footer "Footer")
+  + [Future Features](#future-features "Future Features")
 + [Deployment](#deployment "Deployment")
   + [GitHub Pages](#github-pages "GitHub Pages")
 + [Testing](#Testing "Testing")
@@ -30,15 +31,15 @@ The levels gradually increase in difficulty, how far can you make it?
 
 ## User Demographic
 This website was designed to:
-  - Provide a simple browser game for those wanting to test their memory
-  - Allow returning users to practice their visual memorization
-  - Be quick and accesible enough to be played during shorter breaks/downtime
+  - Provide a simple browser game for those wanting to test their memory.
+  - Allow returning users to practice their visual memorization.
+  - Be quick and accesible enough to be played during shorter breaks/downtime.
  
 ## Design
 - As the game revolves around remembering visual patterns, a minimalistic greyscale design was adopted to reduce visual clutter.
 ![Memento Design](assets/images/documentation/memento-design.png)
 - Upon clicking a button or tile their color will change to a darker gray to provide a sense of physicality, as if a button is being pressed.
-- The only time more vivid colors are used are light hues of green/red to signal correct/incorrect selections respectively
+- The only time more vivid colors are used are light hues of green/red to signal correct/incorrect selections respectively.
 
   ![Memento Tile Colors](assets/images/documentation/memento-tile-colors.png)
 
@@ -47,29 +48,73 @@ This website was designed to:
   ![Memento Buttons](assets/images/documentation/memento-buttons.png)
 
 ## Typography
+- All text on the website uses the Google font "Roboto Slab" as it appears modern yet simplistic which adheres to our overarching design goals.
+- The Memento logo was created using the font "Bahnschrift Condensed".
 
 # Flowchart
 ![Memento Lucid Flowchart](assets/images/documentation/memento-lucid-chart.png)
+
 # Features
 
 ## Header
+- The top left of the page features a simplistic Memento logo, on smaller screen sizes this logo will be centered.
+
+  ![Memento logo](assets/images/memento-logo.png)
 
 ## How to play
+- On page load the user will be greeted by a window with instructions on how to play
+  
+  ![How To Play menu](assets/images/documentation/memento-how-to-play.png)
+  - Clicking the play button will clear the play area and boot up the game
 
 ## Game Over screen
+- On losing 3 lives the player will be presented a menu showing their final score
+  
+  ![Game Over menu](assets/images/documentation/memento-game-over.png)
+  - "Go back" will return the user to the "How to play" menu
+  - "Retry" will reset the game so the user may play again.
 
 ## Footer
+- The bottom of the page features a disclaimer that the website is a portfolio project and links to the creator's GitHub and LinkedIn
+  - The footer is fully responsive at any screen size
+  
+
+    ![Full Footer](assets/images/documentation/memento-footer-full.png)
+
+    ![Resized Footer](assets/images/documentation/memento-footer-mobile.png)
+
+  - The links both open in a new window/tab on click
 
 # Development
 
 ## GitHub Pages
+The project was deployed to GitHub Pages (Link [here](https://andreeeasn.github.io/pp2-memento/)) using the following steps:
+  1. Log in to GitHub and locate your project repository
+  2. At the top of the repository, select the "Settings" option from the menu
+  3. Find the "Pages" option in the list of settings
+  4. Find the "Branch" option and select your desired branch ("None" by default, set to "Main") and root ("/(root)" by default)
+  5. Select "Save" and your page will be deployed to GitHub Pages
+  6. Refresh the page and you should be presented with "Your site is live at: (LINK)" at the top of the page
+
+If the link doesn't appear after refreshing your page, wait for a few minutes before trying again
 
 # Testing
 
-## General Testing
-
 ## Validator Testing
 
-## Bugs Encountered
+- HTML
+    - No errors were returned when testing all the pages through the [W3C HTML Validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fandreeeasn.github.io%2Fpp2-memento%2Findex.html) <br>
+  ![W3C HTML Validator Results](assets/images/documentation/memento-w3c-html.png)
 
+- CSS
+  - No errors were returned when testing style.css through the [W3C CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fandreeeasn.github.io%2Fpp2-memento%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>
+  ![W3C CSS Validator Results](assets/images/documentation/memento-w3c-css.png)
+
+- Lighthouse Audit<br>
+![Lighthouse Audit](assets/images/documentation/memento-lighthouse-audit.png)
+
+## Bugs Encountered
+  - Favicon not loading properly on deployed website
+    - This was fixed by changing the href path of the icon in index.html "/assets/[...].png" to "assets/[...].png" as the former is considered an absolute path and is not supported
+  
 # Credits
