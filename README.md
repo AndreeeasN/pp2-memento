@@ -29,13 +29,27 @@ The levels gradually increase in difficulty, how far can you make it?
 # UX
 
 ## User Demographic
-
+This website was designed to:
+  - Provide a simple browser game for those wanting to test their memory
+  - Allow returning users to practice their visual memorization
+  - Be quick and accesible enough to be played during shorter breaks/downtime
+ 
 ## Design
+- As the game revolves around remembering visual patterns, a minimalistic greyscale design was adopted to reduce visual clutter.
+![Memento Design](assets/images/documentation/memento-design.png)
+- Upon clicking a button or tile their color will change to a darker gray to provide a sense of physicality, as if a button is being pressed.
+- The only time more vivid colors are used are light hues of green/red to signal correct/incorrect selections respectively
+
+  ![Memento Tile Colors](assets/images/documentation/memento-tile-colors.png)
+
+- Buttons are also styled to resemble the tiles used in-game except with a Font-awesome icon featured on it.
+
+  ![Memento Buttons](assets/images/documentation/memento-buttons.png)
 
 ## Typography
 
 # Flowchart
-
+![Memento Lucid Flowchart](assets/images/documentation/memento-lucid-chart.png)
 # Features
 
 ## Header
