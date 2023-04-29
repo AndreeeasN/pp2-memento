@@ -370,6 +370,7 @@ function generateHowToPlay(){
             <li>Once hidden, click as many tiles as you can remember.</li>
             <li>Picking the wrong tile 3 times will cost you a life.</li>
             <li>Levels get progressively more difficult, make it as far as you can!</li>
+            <li id="small-text">To quickly restart, refresh page by clicking the "Memento" logo</li>
         </ol>
         <h2>Start</h2>
         <div class="play-button">

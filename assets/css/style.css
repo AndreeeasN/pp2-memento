@@ -58,6 +58,13 @@ h2{
     margin-bottom: 5px;
 }
 
+#how-to-play #small-text{
+    font-size: small;
+    list-style: none;
+    text-align: center;
+    margin-top: 5%;
+}
+
 /* retry window*/
 #retry-buttons{
     display: flex;
@@ -197,6 +204,10 @@ footer a:hover{
     #how-to-play h1{
         font-size: 2em;
         margin: 10px 0 0;
+    }
+
+    #how-to-play #small-text{
+        font-size: x-small;
     }
 
     .play-button{

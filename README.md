@@ -85,6 +85,17 @@ This website was designed to:
 
   - The links both open in a new window/tab on click
 
+## Future Features
+As the functionality of grid generation and tile interaction have already been implemented, re-using these for different gamemodes might prove an interesting idea
+- Time Trial
+  - Final score based on time passed rather than tiles clicked
+  - Less focus on lives, incorrect tile selections add seconds to the timer instead
+  - Finish line is at specified level rather than being infinite
+- "Game" mode
+  - Less serious approach, features a limited amount of hints
+  - Hints can be restored by selecting tiles that glow yellow instead of white during reveal
+  - Hint tiles are rare towards the start but become more common at higher levels
+
 # Development
 
 ## GitHub Pages
