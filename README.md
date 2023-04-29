@@ -123,12 +123,16 @@ If the link doesn't appear after refreshing your page, wait for a few minutes be
   - No errors were returned when testing style.css through the [W3C CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fandreeeasn.github.io%2Fpp2-memento%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>
   ![W3C CSS Validator Results](assets/images/documentation/memento-w3c-css.png)
 
+- JSHint
+  - No errors were returned when testing script.js through the [JSHint Linter](https://jshint.com/) (using /* jshint esversion: 6 */)<br>
+  ![JSHint Linter](assets/images/documentation/memento-jshint.png)<br>
+
 - Lighthouse Audit<br>
 ![Lighthouse Audit](assets/images/documentation/memento-lighthouse-audit.png)
 
 ## Bugs Encountered
   - [RESOLVED] Favicon not loading properly on deployed website
-    - This was fixed by changing the href path of the icon in index.html "/assets/[...].png" to "assets/[...].png" as the former is considered an absolute path and is not supported
+    - This was fixed by changing the href path of the icon in index.html "<strong>/assets</strong>/[...].png" to "<strong>assets</strong>/[...].png" as the former is considered an absolute path and is not supported
   - [RESOLVED] EventListeners attached to HTML elements not reacting to inputs
     - Fixed by replacing addEventListener("onclick", gameStart) with addEventListener("click", gameStart)
 
