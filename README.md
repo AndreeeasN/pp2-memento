@@ -42,7 +42,7 @@ This website was designed to:
 
   ![Memento Tile Colors](assets/images/documentation/memento-tile-colors.png)
 
-- Buttons are also styled to resemble the tiles used in-game except with a Font-awesome icon featured on it.
+- Buttons are also styled to resemble the tiles used in-game with a Font-awesome icon featured on it.
 
   ![Memento Buttons](assets/images/documentation/memento-buttons.png)
 
