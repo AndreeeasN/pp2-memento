@@ -57,9 +57,11 @@ This website was designed to:
 # Features
 
 ## Header
-- The top left of the page features a simplistic Memento logo, on smaller screen sizes this logo will be centered.
+- The top left of the page features the Memento logo, on smaller screen sizes this logo will be centered.
 
   ![Memento logo](assets/images/memento-logo.png)
+  
+- Upon clicking the logo the page will be refreshed, restarting the game
 
 ## How to play
 - On page load the user will be greeted by a window with instructions on how to play
@@ -125,9 +127,11 @@ If the link doesn't appear after refreshing your page, wait for a few minutes be
 ![Lighthouse Audit](assets/images/documentation/memento-lighthouse-audit.png)
 
 ## Bugs Encountered
-  - Favicon not loading properly on deployed website
+  - [RESOLVED] Favicon not loading properly on deployed website
     - This was fixed by changing the href path of the icon in index.html "/assets/[...].png" to "assets/[...].png" as the former is considered an absolute path and is not supported
-  
+  - [RESOLVED] EventListeners attached to HTML elements not reacting to inputs
+    - Fixed by replacing addEventListener("onclick", gameStart) with addEventListener("click", gameStart)
+
 # Credits
 Resources and tutorials used for developing this project:
 - [Stop footer from floating up a short page](https://www.youtube.com/watch?v=yc2olxLgKLk) by youtuber [Kevin Powell](https://www.youtube.com/@KevinPowell)
