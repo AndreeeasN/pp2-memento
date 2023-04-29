@@ -129,3 +129,10 @@ If the link doesn't appear after refreshing your page, wait for a few minutes be
     - This was fixed by changing the href path of the icon in index.html "/assets/[...].png" to "assets/[...].png" as the former is considered an absolute path and is not supported
   
 # Credits
+Resources and tutorials used for developing this project:
+- [Stop footer from floating up a short page](https://www.youtube.com/watch?v=yc2olxLgKLk) by youtuber [Kevin Powell](https://www.youtube.com/@KevinPowell)
+- [StackOverflow - Generate unique random numbers](https://stackoverflow.com/questions/2380019/generate-unique-random-numbers-between-1-and-100/2380113#2380113)
+- [Human Benchmark](https://humanbenchmark.com/), a website that measures abilities with cognitive tests and inspired Memento's creation
+
+
+Huge thanks to my Code Institute mentor, [Lauren-Nicole Popich](https://www.linkedin.com/in/lauren-nicole-popich-1ab87539/) for providing guidance and expertise despite a jam-packed schedule.
