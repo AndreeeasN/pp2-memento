@@ -58,8 +58,8 @@ This website was designed to:
 
 ## Header
 - The top left of the page features the Memento logo, on smaller screen sizes this logo will be centered.
-
-  ![Memento logo](assets/images/memento-logo.png)
+  
+  ![Memento Logo](assets/images/documentation/memento-logo-opaque.png)
   
 - Upon clicking the logo the page will be refreshed, restarting the game
 
